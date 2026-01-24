@@ -1,7 +1,7 @@
 const App = () => {
   return (
-    <div className='bg-amber-700 h-screen'>
-      
+    <div className='bg-gray-950 h-screen w-full text-white'>
+      <h1>Hello</h1>
     </div>
   )
 }
