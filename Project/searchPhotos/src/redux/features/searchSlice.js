@@ -28,7 +28,7 @@ const searchSlice = createSlice({
             state.error = action.payload
             state.loading = false
         },
-        clearResults(state){
+        clearResults(state) {
             state.results = []
         }
 
