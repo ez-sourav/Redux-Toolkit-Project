@@ -3,13 +3,11 @@ import { useDispatch } from "react-redux";
 
 const SearchBar = () => {
   const [text, setText] = useState("");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(setQuery(text))
-    setText('')
-    
-   
+    dispatch(setQuery(text));
+    setText("");
   };
   return (
     <div>
@@ -21,8 +19,8 @@ const SearchBar = () => {
       >
         <input
           value={text}
-          onChange={(e)=>{
-             setText(e.target.value);
+          onChange={(e) => {
+            setText(e.target.value);
           }}
           className="w-full border-2 px-5 py-2 text-white text-xl rounded-md outline-none"
           type="text"
