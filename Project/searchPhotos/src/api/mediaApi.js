@@ -20,7 +20,7 @@ export async function fetchVideos(query, per_page = 15) {
     return res.data
 }
 
-export async function fetchGIF(query, page = 1, per_page = 15) {
+export async function fetchGIF(query, page = 1, per_page = 20) {
     const offset = (page - 1) * per_page;
     const res = await axios.get('https://api.giphy.com/v1/gifs/search', {
         params: { q: query, api_key: GIPHY_KEY, limit: per_page, offset },
