@@ -15,7 +15,7 @@ const ResultGrid = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(!query) return 
+    if (!query) return;
     const getData = async () => {
       try {
         dispatch(setLoading());
@@ -28,26 +28,31 @@ const ResultGrid = () => {
             title: item.alt_description,
             thumbnail: item.urls.small,
             src: item.urls.full,
+            url:item.links.html
           }));
         }
         if (activeTab == "videos") {
           let response = await fetchVideos(query);
+     
           data = response.videos.map((item) => ({
             id: item.id,
             type: "video",
             title: item.user.name || "video",
             thumbnail: item.image,
             src: item.video_files[3].link,
+            url:item.url
           }));
         }
         if (activeTab == "gif") {
           let response = await fetchGIF(query);
+          
           data = response.data.map((item) => ({
             id: item.id,
             type: "gif",
             title: item.title,
             thumbnail: item.images.fixed_height_small_still.url,
             src: item.images.original.url,
+            url:item.url
           }));
         }
         dispatch(setResults(data));
@@ -64,7 +69,13 @@ const ResultGrid = () => {
   return (
     <div className="flex w-full justify-between flex-wrap  gap-6 overflow-auto px-10">
       {results.map((item, idx) => {
-        return <div key={idx}><ResultCard item={item}/></div>
+        return (
+          <div key={idx}>
+           
+              <ResultCard item={item} />
+          
+          </div>
+        );
       })}
     </div>
   );
