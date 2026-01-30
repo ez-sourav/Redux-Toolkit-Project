@@ -8,6 +8,7 @@ import {
 import { useEffect } from "react";
 import ResultCard from "./ResultCard";
 
+
 const ResultGrid = () => {
   const { query, activeTab, results, loading, error } = useSelector(
     (store) => store.search,
@@ -18,7 +19,7 @@ const ResultGrid = () => {
     if (!query) return;
     const getData = async () => {
       try {
-        dispatch(setLoading());
+        dispatch(setLoading(true));
         let data = [];
         if (activeTab == "photos") {
           let response = await fetchPhotos(query);
@@ -62,18 +63,30 @@ const ResultGrid = () => {
     };
 
     getData();
-  }, [query, activeTab]);
+  }, [query, activeTab,dispatch]);
 
   if (error) return <h1>Error</h1>;
-  if (loading) return <h1>Loading..</h1>;
+  if (loading) {
+  return (
+    <div className="flex w-full flex-wrap gap-6 px-10">
+      {Array(12)
+        .fill(0)
+        .map((_, i) => (
+          <div
+            key={i}
+            className="w-[18vw] h-80 rounded-xl bg-zinc-200 animate-pulse"
+          />
+        ))}
+    </div>
+  );
+}
+
   return (
     <div className="flex w-full justify-between flex-wrap  gap-6 overflow-auto px-10">
-      {results.map((item, idx) => {
+      {results.map((item) => {
         return (
-          <div key={idx}>
-           
+          <div key={item.id}>
               <ResultCard item={item} />
-          
           </div>
         );
       })}
