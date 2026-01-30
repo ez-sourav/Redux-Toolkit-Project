@@ -11,6 +11,8 @@ const ResultCard = ({ item }) => {
       >
         {item.type === 'photo' && (
           <img
+            loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover object-center hover:scale-105 transition-transform duration-300"
             src={item.src}
             alt=""
@@ -19,6 +21,7 @@ const ResultCard = ({ item }) => {
 
         {item.type === 'video' && (
           <video
+            preload="metadata"
             className="h-full w-full object-cover object-center"
             autoPlay
             loop
@@ -38,10 +41,10 @@ const ResultCard = ({ item }) => {
 
    
       <div className="absolute bottom-0 left-0 w-full flex justify-between items-center gap-2 px-4 py-3 bottom-gradient text-white">
-        <h2 className="text-sm font-semibold capitalize truncate">
+        <h2 className="text-sm font-semibold capitalize truncate overflow-hidden">
           {item.title}
         </h2>
-        <button className="bg-indigo-600 hover:bg-indigo-700 transition-colors text-white rounded-md px-3 py-1 text-sm font-medium">
+        <button className="bg-indigo-600 hover:bg-indigo-700 transition-colors text-white rounded-md px-3 py-1 text-sm font-medium active:scale-95 hover:cursor-pointer">
           Save
         </button>
       </div>
