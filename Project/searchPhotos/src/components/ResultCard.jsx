@@ -1,10 +1,11 @@
+import { useDispatch } from "react-redux";
+import { addCollection, addedTost } from "../redux/features/collectionSlice";
+
 const ResultCard = ({ item }) => {
+  const dispatch = useDispatch()
   const addToCollection = (item) => {
-    const oldData = JSON.parse(localStorage.getItem('collection')) || []
-    const newData = [...oldData,item]
-    localStorage.setItem('collection',JSON.stringify(newData))
-    console.log(newData);
-    
+    dispatch(addCollection(item))
+    dispatch(addedTost())
   };
 
   return (
