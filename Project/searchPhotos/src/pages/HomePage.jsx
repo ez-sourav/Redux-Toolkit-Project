@@ -7,10 +7,15 @@ const HomePage = () => {
   const { query } = useSelector((store) => store.search);
   return (
     <div>
-      
       <SearchBar />
-      {query != '' ? <div><Tabs />
-      <ResultGrid /></div>:''}
+      {query != "" ? (
+        <div>
+          <Tabs />
+          <ResultGrid />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
