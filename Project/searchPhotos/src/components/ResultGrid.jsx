@@ -74,7 +74,7 @@ const ResultGrid = () => {
           .map((_, i) => (
             <div
               key={i}
-              className="aspect-[3/4] rounded-xl bg-white/10 animate-pulse"
+              className="aspect-3/4 rounded-xl bg-white/10 animate-pulse"
             />
           ))}
       </div>
