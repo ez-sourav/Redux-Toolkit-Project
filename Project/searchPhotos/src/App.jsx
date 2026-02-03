@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import CollectionPage from "./pages/CollectionPage";
 import NavBar from "./components/NavBar";
-import { ToastContainer,Zoom } from "react-toastify";
+import { ToastContainer, Zoom } from "react-toastify";
 
 const App = () => {
   return (
