@@ -65,7 +65,6 @@ const CollectionCard = ({ item }) => {
         )}
       </a>
 
-     
       <div
         className="
           absolute bottom-0 left-0 w-full
