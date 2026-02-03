@@ -9,7 +9,7 @@ const HomePage = () => {
     <div>
       <SearchBar />
       {query != "" ? (
-        <div>
+        <div >
           <Tabs />
           <ResultGrid />
         </div>

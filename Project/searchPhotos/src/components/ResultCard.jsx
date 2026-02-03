@@ -77,8 +77,9 @@ const ResultCard = ({ item }) => {
             rounded-md
             bg-red-500
             text-white
-            hover:bg-white/20
+            hover:bg-red-600
             transition
+            hover:cursor-pointer
             active:scale-95
           "
         >
