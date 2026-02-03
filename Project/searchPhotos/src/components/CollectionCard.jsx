@@ -18,7 +18,7 @@ const CollectionCard = ({ item }) => {
       className="
         relative
         w-full
-        aspect-[3/4]
+        aspect-3/4
         rounded-xl
         overflow-hidden
         bg-[#020617]
