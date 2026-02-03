@@ -12,9 +12,4 @@
 *{
   font-family: "Nunito", sans-serif;
 }
-:root{
-  --c1: #0f172a;   /* dark slate (main bg) */
-  --c2: #020617;   /* navbar bg */
-  --c3: #1e293b;   /* cards / sections */
-  --c4: #f8fafc;   /* light text / buttons */
-}
+
