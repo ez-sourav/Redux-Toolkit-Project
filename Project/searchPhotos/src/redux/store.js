@@ -5,6 +5,6 @@ import collectionReducer from './features/collectionSlice'
 export const store = configureStore({
     reducer: {
         search: searchReducer,
-        collection:collectionReducer,
+        collection: collectionReducer,
     }
 })
