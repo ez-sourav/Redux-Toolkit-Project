@@ -28,7 +28,7 @@ const ResultGrid = () => {
             id: item.id,
             type: "photo",
             title: item.alt_description || "photo",
-            src: item.urls.full,
+            src: item.urls.regular,
             url: item.links.html,
           }));
         }
