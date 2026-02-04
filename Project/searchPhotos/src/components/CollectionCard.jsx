@@ -1,4 +1,5 @@
 import React from "react";
+import { Trash2 } from 'lucide-react';
 import { useDispatch } from "react-redux";
 import {
   removeCollection,
@@ -7,7 +8,6 @@ import {
 
 const CollectionCard = ({ item }) => {
   const dispatch = useDispatch();
-
   const removeFromCollection = (item) => {
     dispatch(removeCollection(item.id));
     dispatch(removeTost());
@@ -28,6 +28,20 @@ const CollectionCard = ({ item }) => {
         group
       "
     >
+        <h2
+    className="
+      absolute top-2 right-2
+      z-10
+      text-xs uppercase
+      px-2 py-1
+      rounded-md
+      bg-black/70
+      text-white
+      backdrop-blur
+    "
+  >
+    {item.type}
+  </h2>
       <a
         href={item.url}
         target="_blank"
@@ -73,6 +87,7 @@ const CollectionCard = ({ item }) => {
           bg-linear-to-t from-black/70 via-black/40 to-transparent
         "
       >
+  
         <h2 className="text-sm sm:text-base font-medium text-white truncate">
           {item.title}
         </h2>
@@ -81,7 +96,7 @@ const CollectionCard = ({ item }) => {
           onClick={() => removeFromCollection(item)}
           className="
             shrink-0
-            px-3 py-1.5
+            px-4 py-2
             text-xs sm:text-sm
             rounded-md
             bg-red-500
@@ -92,7 +107,7 @@ const CollectionCard = ({ item }) => {
             active:scale-95
           "
         >
-          Remove
+          <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
       </div>
     </div>
