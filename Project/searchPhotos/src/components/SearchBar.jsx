@@ -1,18 +1,25 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+
 import { setQuery } from "../redux/features/searchSlice";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Search, X } from "lucide-react";
 
 const SearchBar = () => {
   const [text, setText] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const dispatch = useDispatch();
+  const { query } = useSelector((store) => store.search);
+useEffect(() => {
+  setText(query);
+}, [query]);
+
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (text.trim()) {
       dispatch(setQuery(text));
-      setText("");
+      
     }
   };
 
