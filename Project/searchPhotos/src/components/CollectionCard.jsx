@@ -16,7 +16,7 @@ const CollectionCard = ({ item }) => {
     dispatch(removeTost());
   };
 
-  // ✅ Download handler
+ 
   const handleDownload = async (e) => {
     e.preventDefault();
     e.stopPropagation();
