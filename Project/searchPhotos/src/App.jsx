@@ -6,7 +6,7 @@ import { ToastContainer, Zoom } from "react-toastify";
 
 const App = () => {
   return (
-    <div className="min-h-screen w-full  bg-linear-to-br from-[#020617] via-[#020617] to-[#0f172a] text-white">
+    <div className="min-h-screen w-full pb-5 bg-linear-to-br from-[#020617] via-[#020617] to-[#0f172a] text-white">
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
