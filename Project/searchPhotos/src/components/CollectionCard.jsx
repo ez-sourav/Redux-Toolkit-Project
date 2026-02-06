@@ -1,4 +1,3 @@
-import React from "react";
 import { Trash2, Download } from "lucide-react";
 import { useDispatch } from "react-redux";
 import {
