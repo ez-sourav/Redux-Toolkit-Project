@@ -1,6 +1,8 @@
 import { Trash2, Download } from "lucide-react";
 import { useDispatch } from "react-redux";
 import {
+  downloadFailedToast,
+  downloadSuccessToast,
   removeCollection,
   removeTost,
 } from "../redux/features/collectionSlice";
@@ -15,7 +17,6 @@ const CollectionCard = ({ item }) => {
     dispatch(removeTost());
   };
 
- 
   const handleDownload = async (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -33,8 +34,9 @@ const CollectionCard = ({ item }) => {
 
       a.remove();
       window.URL.revokeObjectURL(blobUrl);
+      dispatch(downloadSuccessToast());
     } catch (err) {
-      console.error("Download failed", err);
+      dispatch(downloadFailedToast());
     }
   };
 
@@ -53,7 +55,6 @@ const CollectionCard = ({ item }) => {
         group
       "
     >
-      {/* ===== TYPE BADGE (ALWAYS VISIBLE) ===== */}
       <span
         className="
           absolute top-2 left-2 z-10
@@ -68,7 +69,6 @@ const CollectionCard = ({ item }) => {
         {item.type}
       </span>
 
-     
       <button
         onClick={handleDownload}
         title="Download"
@@ -91,12 +91,7 @@ const CollectionCard = ({ item }) => {
         <Download size={16} />
       </button>
 
-     
-      <a
-       
-        rel="noopener noreferrer"
-        className="absolute inset-0"
-      >
+      <a rel="noopener noreferrer" className="absolute inset-0">
         {item.type === "photo" && (
           <img
             src={item.src}
@@ -113,31 +108,25 @@ const CollectionCard = ({ item }) => {
         )}
 
         {item.type === "video" && (
-  <video
-    src={item.src}
-    muted
-    loop
-    preload="metadata"
-    playsInline
-    className="w-full h-full object-cover"
-    onMouseEnter={(e) => e.currentTarget.play()}
-    onMouseLeave={(e) => e.currentTarget.pause()}
-  />
-)}
-
+          <video
+            src={item.src}
+            muted
+            loop
+            preload="metadata"
+            playsInline
+            className="w-full h-full object-cover"
+            onMouseEnter={(e) => e.currentTarget.play()}
+            onMouseLeave={(e) => e.currentTarget.pause()}
+          />
+        )}
 
         {item.type === "gif" && (
-          <img
-            src={item.src}
-            alt=""
-            className="w-full h-full object-cover"
-          />
+          <img src={item.src} alt="" className="w-full h-full object-cover" />
         )}
       </a>
 
-   
       <div
-  className="
+        className="
     absolute bottom-0 left-0 w-full
     px-3 sm:px-4 py-3
     flex items-center gap-3
@@ -147,10 +136,9 @@ const CollectionCard = ({ item }) => {
     sm:group-hover:opacity-100
     transition-opacity duration-200
   "
->
- 
-  <h2
-    className="
+      >
+        <h2
+          className="
       flex-1
       min-w-0
       text-sm sm:text-base
@@ -158,16 +146,15 @@ const CollectionCard = ({ item }) => {
       text-white
       truncate
     "
-    title={item.title}
-  >
-    {item.title}
-  </h2>
+          title={item.title}
+        >
+          {item.title}
+        </h2>
 
- 
-  <button
-    onClick={removeFromCollection}
-    title="Remove"
-    className="
+        <button
+          onClick={removeFromCollection}
+          title="Remove"
+          className="
       shrink-0
       h-9 w-9
       flex items-center justify-center
@@ -179,11 +166,10 @@ const CollectionCard = ({ item }) => {
       transition
       active:scale-95
     "
-  >
-    <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
-  </button>
-</div>
-
+        >
+          <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
+        </button>
+      </div>
     </div>
   );
 };
