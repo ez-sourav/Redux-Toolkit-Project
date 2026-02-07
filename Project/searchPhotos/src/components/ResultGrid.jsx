@@ -77,12 +77,17 @@ const ResultGrid = () => {
           }));
         }
 
-        dispatch(setResults(data));
+        const uniqueData = data.filter(
+          (item, index, self) =>
+            index ===
+            self.findIndex((t) => t.id === item.id && t.type === item.type)
+        );
+
+        dispatch(setResults(uniqueData));
       } catch (err) {
         dispatch(setError(err.message));
       }
     };
-
     getData();
   }, [query, activeTab, page, dispatch]);
 
@@ -120,7 +125,7 @@ const ResultGrid = () => {
     <>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 px-4 sm:px-6">
         {results.map((item) => (
-          <ResultCard key={item.id} item={item} />
+          <ResultCard key={`${item.type}-${item.id}`} item={item} />
         ))}
       </div>
 
