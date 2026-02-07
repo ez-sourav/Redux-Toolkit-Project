@@ -10,13 +10,13 @@ const collectionSlice = createSlice({
     reducers: {
         addCollection: (state, action) => {
             const alreadyExists = state.items.find(
-                items => items.id == action.payload.id
-            )
-            if (!alreadyExists) {
-                state.items.push(action.payload)
-                localStorage.setItem('collection', JSON.stringify(state.items))
-            }
+                (item) => item.id === action.payload.id && item.type === action.payload.type
+            );
 
+            if (!alreadyExists) {
+                state.items.push(action.payload);
+                localStorage.setItem("collection", JSON.stringify(state.items));
+            }
         },
         removeCollection: (state, action) => {
             state.items = state.items.filter(
@@ -31,7 +31,7 @@ const collectionSlice = createSlice({
         addedTost: () => {
             toast.success('Added to Collection', {
                 position: "top-right",
-                autoClose: 1500,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: false,
                 pauseOnHover: false,
@@ -44,6 +44,33 @@ const collectionSlice = createSlice({
         removeTost: () => {
             toast.error('Removed from Collection', {
                 position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Zoom,
+            });
+        },
+        clearToast: () => {
+  toast.error("Collection Cleared", {
+    position: "top-right",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Zoom,
+  });
+},
+
+        downloadSuccessToast: () => {
+            toast.success("Download started", {
+                position: "top-right",
                 autoClose: 1200,
                 hideProgressBar: false,
                 closeOnClick: false,
@@ -53,9 +80,24 @@ const collectionSlice = createSlice({
                 theme: "dark",
                 transition: Zoom,
             });
-        }
+        },
+
+        downloadFailedToast: () => {
+            toast.error("Download failed", {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Zoom,
+            });
+        },
+
     }
 })
 
-export const { addCollection, removeCollection, clearCollection, addedTost, removeTost } = collectionSlice.actions
+export const { addCollection, removeCollection, clearCollection, addedTost, removeTost, clearToast,downloadSuccessToast, downloadFailedToast } = collectionSlice.actions
 export default collectionSlice.reducer;
