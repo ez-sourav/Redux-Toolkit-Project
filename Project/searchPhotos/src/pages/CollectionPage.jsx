@@ -42,7 +42,7 @@ const CollectionPage = () => {
           </button>
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center py-24 text-center">
+        <div className="flex min-h-[70vh] flex-col items-center justify-center  text-center">
           <Inbox className="w-12 h-12 sm:w-16 sm:h-16 text-white/20 mb-4" />
           <h2 className="text-2xl sm:text-4xl font-medium text-white/50">
             Your collection is empty
