@@ -9,21 +9,35 @@ const searchSlice = createSlice({
     loading: false,
     error: null,
     page: 1,
-    maxPages: 10,
+    maxPages: 1,
+    noMoreResults: false,
   },
   reducers: {
     setQuery(state, action) {
       state.query = action.payload;
-      state.page = 1; 
+      state.page = 1;
+      state.maxPages = 1;
+      state.noMoreResults = false;
     },
+
 
     setActiveTabs(state, action) {
       state.activeTab = action.payload;
-      state.page = 1; 
+      state.page = 1;
+      state.maxPages = 1;
+      state.noMoreResults = false;
     },
+
 
     setPage(state, action) {
       state.page = action.payload;
+    },
+    setMaxPages(state, action) {
+      state.maxPages = action.payload;
+    },
+
+    setNoMoreResults(state, action) {
+      state.noMoreResults = action.payload;
     },
 
     setResults(state, action) {
@@ -36,8 +50,10 @@ const searchSlice = createSlice({
       if (action.payload) {
         state.results = [];
         state.error = null;
+        state.noMoreResults = false;
       }
     },
+
 
     setError(state, action) {
       state.error = action.payload;
@@ -58,6 +74,8 @@ export const {
   setError,
   clearResults,
   setPage,
+  setMaxPages,
+  setNoMoreResults,
 } = searchSlice.actions;
 
 export default searchSlice.reducer;
