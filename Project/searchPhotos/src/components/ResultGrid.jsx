@@ -7,6 +7,8 @@ import {
   setLoading,
   setResults,
   setPage,
+  setMaxPages,
+  setNoMoreResults,
 } from "../redux/features/searchSlice";
 import { useEffect } from "react";
 import ResultCard from "./ResultCard";
@@ -36,6 +38,8 @@ const ResultGrid = () => {
 
         if (activeTab === "photos") {
           const response = await fetchPhotos(query, page, 20);
+          dispatch(setMaxPages(Math.min(response.total_pages || 1, 50)));
+
           data = response.results.map((item) => ({
             id: item.id,
             type: "photo",
@@ -47,6 +51,8 @@ const ResultGrid = () => {
 
         if (activeTab === "videos") {
           const response = await fetchVideos(query, page, 20);
+          const totalPages = Math.ceil(response.total_results / 20);
+          dispatch(setMaxPages(Math.min(totalPages || 1, 50)));
 
           data = response.videos.map((item) => {
             const fastVideo =
@@ -68,6 +74,9 @@ const ResultGrid = () => {
 
         if (activeTab === "gif") {
           const response = await fetchGIF(query, page, 20);
+          const totalPages = Math.ceil(response.pagination.total_count / 20);
+          dispatch(setMaxPages(Math.min(totalPages || 1, 50)));
+
           data = response.data.map((item) => ({
             id: item.id,
             type: "gif",
@@ -80,8 +89,14 @@ const ResultGrid = () => {
         const uniqueData = data.filter(
           (item, index, self) =>
             index ===
-            self.findIndex((t) => t.id === item.id && t.type === item.type)
+            self.findIndex((t) => t.id === item.id && t.type === item.type),
         );
+
+        if (uniqueData.length === 0) {
+          dispatch(setNoMoreResults(true));
+        } else {
+          dispatch(setNoMoreResults(false));
+        }
 
         dispatch(setResults(uniqueData));
       } catch (err) {
@@ -123,6 +138,27 @@ const ResultGrid = () => {
 
   return (
     <>
+      {results.length === 0 && !loading && (
+        <div className="flex flex-col items-center justify-center py-24 text-center px-4">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-white/80">
+            No results found
+          </h2>
+
+          <p className="mt-4 text-white/50 max-w-md">
+            No more results available for "{query}". Try another keyword.
+          </p>
+
+          {page > 1 && (
+            <button
+              onClick={() => dispatch(setPage(page - 1))}
+              className="mt-6 px-5 py-2 rounded-md bg-white text-black font-medium hover:bg-white/80 transition"
+            >
+              Go Back
+            </button>
+          )}
+        </div>
+      )}
+
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 px-4 sm:px-6">
         {results.map((item) => (
           <ResultCard key={`${item.type}-${item.id}`} item={item} />
